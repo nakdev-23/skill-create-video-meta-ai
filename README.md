@@ -20,11 +20,39 @@
 
 ---
 
-## ติดตั้ง (Install) — 2 ขั้นตอน
+## ติดตั้ง (Install)
 
-### 1) วาง skill ลงในเครื่อง
+มี 2 วิธี — เลือกอย่างใดอย่างหนึ่ง
 
-วางโฟลเดอร์ `meta-ai-video/` (ทั้งโฟลเดอร์ มี `SKILL.md` + `scripts/`) ไว้ที่:
+### ⭐ วิธี A (แนะนำ): ให้ Claude ติดตั้งให้
+
+เปิด Claude Code แล้ว **ก็อปข้อความนี้ทั้งก้อนวางในแชท** — Claude จะ clone repo, วาง skill ให้ถูกที่, และเชื่อม Playwright MCP ให้เอง:
+
+```text
+ช่วยติดตั้ง skill "meta-ai-video" ให้หน่อย ทำตามนี้:
+1. clone https://github.com/nakdev-23/skill-create-video-meta-ai
+2. ก็อปไฟล์ทั้งหมด (SKILL.md + scripts/) ไปไว้ที่ ~/.claude/skills/meta-ai-video/
+   (Windows: C:\Users\<ชื่อ>\.claude\skills\meta-ai-video\)
+3. เชื่อม Playwright MCP: รัน `claude mcp add playwright -- npx @playwright/mcp@latest`
+   แล้วเช็คด้วย `claude mcp list` ว่ามี playwright
+4. บอกฉันด้วยว่าเสร็จแล้วต้องเปิด session ใหม่ไหม
+```
+
+เสร็จแล้วเปิด session ใหม่ (ถ้า Claude บอก) — เรียกใช้ได้เลยด้วย `/meta-ai-video`
+
+### 🔧 วิธี B: ติดตั้งเอง — 2 ขั้นตอน
+
+**1) วาง skill ลงในเครื่อง**
+
+Clone แล้วก็อปเข้าโฟลเดอร์ skills:
+
+```bash
+git clone https://github.com/nakdev-23/skill-create-video-meta-ai
+mkdir -p ~/.claude/skills/meta-ai-video
+cp -r skill-create-video-meta-ai/SKILL.md skill-create-video-meta-ai/scripts ~/.claude/skills/meta-ai-video/
+```
+
+หรือวางเองที่ตำแหน่งนี้ (ทั้งโฟลเดอร์ มี `SKILL.md` + `scripts/`):
 
 | ใช้ทุกโปรเจกต์ (ส่วนตัว) | เฉพาะโปรเจกต์เดียว |
 |---|---|
@@ -35,7 +63,7 @@
 
 Claude Code จะ **เห็น skill เองอัตโนมัติ** ไม่ต้องลงทะเบียนเพิ่ม (เปิด session ใหม่ถ้าเปิดค้างอยู่)
 
-### 2) เชื่อม Playwright MCP server
+**2) เชื่อม Playwright MCP server**
 
 รันคำสั่งนี้ใน terminal ครั้งเดียว:
 
